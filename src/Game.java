@@ -10,7 +10,6 @@ class Game {
     private boolean gameEnded;
 
     void startGame(boolean singleplayer) {
-
         if(!singleplayer) {
             System.out.println(
                     "You chose multiplayer. Have fun\n" +
@@ -22,7 +21,7 @@ class Game {
         } else {
             System.out.println(
                     "You chose singleplayer. Have fun\n" +
-                            "Choose name for player one"
+                            "Choose your name"
             );
             board.getPlayerOne().setName("Minimax");
             board.getPlayerTwo().setName(sc.nextLine());
@@ -56,8 +55,8 @@ class Game {
 
             // Checks all possible winning combinations on current board and return int based on player.
             if(
-                    board.hasWon(board.getBoard()) == 10 ||
-                    board.hasWon(board.getBoard()) == -10
+                    board.hasWon(board.getBoard()) == 1 ||
+                    board.hasWon(board.getBoard()) == -1
             ) {
                 System.out.println(currentPlayer.getName() + " YOU HAVE WON!\nWant to play again? y/n");
                 gameEnded = true;
@@ -70,8 +69,10 @@ class Game {
 
         // Runs game again on a new board.
         if(sc.nextLine().equalsIgnoreCase("y")) {
-           restart(singleplayer);
+            restart();
+            startGame(singleplayer);
         }
+        restart();
     }
 
     // Method to switch between players.
@@ -80,10 +81,9 @@ class Game {
         else return board.getPlayerTwo();
     }
 
-    private void restart(boolean singleplayer) {
+    private void restart() {
         gameEnded = false;
         board = new Board();
         turn = 0;
-        startGame(singleplayer);
     }
 }

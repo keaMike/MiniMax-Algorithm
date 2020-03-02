@@ -102,7 +102,7 @@ class Board {
 
     private int miniMax(char[][] board, boolean isMaximizing) {
         int result = hasWon(board);
-        // If a player has won just return score/winner
+        // If a player has won return score
         if(result != 0) {
             return result;
         }
@@ -132,9 +132,11 @@ class Board {
                 for (int j = 0; j < board.length; j++) {
                     // Is the spot available
                     if(i % 2 == 0 && j % 2 == 0 && board[i][j] == 0) {
+                        // Place piece and run possibles with best score
                         board[i][j] = playerTwo.getPiece();
                         piecesPlaced++;
                         bestScore = Math.min(bestScore, miniMax(board, true));
+                        // Remove piece again
                         board[i][j] = 0;
                         piecesPlaced--;
                     }

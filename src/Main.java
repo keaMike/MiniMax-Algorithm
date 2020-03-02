@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -22,6 +21,8 @@ public class Main {
                 String choice = sc.nextLine();
                 switch (choice) {
                     case "1":
+                        singleplayer = false;
+
                         game.startGame(singleplayer);
                         break;
                     case "2":
